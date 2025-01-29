@@ -1,0 +1,6 @@
+idCliente;cpf;nome;
+1;987.654.321-00;Pedro Almeida;
+2;876.543.210-11;Paula Pereira;
+3;765.432.109-22;André Martins;
+4;654.321.098-33;Luísa Fernandes;
+5;543.210.987-44;Rita Lopes;

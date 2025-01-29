@@ -1,0 +1,6 @@
+idProduto;codigo;preco;idCategoria;nomeProduto;
+1;A001;50.00;1;bola;
+2;B002;25.00;2;boneca;
+3;C003;60.00;3;antenakwid;
+4;D004;80.00;4;chocolate;
+5;E005;100.00;5;monitor;

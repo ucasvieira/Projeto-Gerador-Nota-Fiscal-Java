@@ -1,0 +1,6 @@
+idVendedor;cpf;nome;
+1;123.456.789-00;João da Silva;
+2;234.567.890-11;Maria Oliveira;
+3;345.678.901-22;Carlos Santos;
+4;456.789.012-33;Ana Costa;
+5;567.890.123-44;José Souza;

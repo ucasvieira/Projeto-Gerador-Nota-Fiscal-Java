@@ -1,0 +1,6 @@
+idCategoria;nome;percentual;
+1;Eletrônicos;20;
+2;Vestuário;15;
+3;Alimentos;10;
+4;Bebidas;12;
+5;Móveis;18;
