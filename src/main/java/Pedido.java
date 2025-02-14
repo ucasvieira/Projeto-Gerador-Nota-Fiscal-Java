@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class Pedido {
 	private int idPedido;
 	private Cliente cliente;
+	private String data;
 	private double valor;
 	private Item[] itens;
+	private Vendedor vendedor;
 
 	public Pedido(String caminho, int chave, String valorChave) throws Exception {
 		Leitor leitor = new Leitor(caminho, chave, valorChave);
@@ -27,19 +30,27 @@ public class Pedido {
 		String[] campos = pedido.split(";");
 
 		// Validação: Garantir que os campos têm pelo menos os 4 campos esperados
-		if (campos.length < 4) {
+		if (campos.length < 5) {
 			throw new IllegalArgumentException("Formato inválido no pedido: " + pedido);
 		}
 
 		this.idPedido = Integer.parseInt(campos[0]); // Campo 0: ID do Pedido
 		String idCliente = campos[1];               // Campo 1: ID do Cliente
+		this.data = campos[2];			// Campo 2: Data pedido
 		this.valor = Double.parseDouble(campos[3]); // Campo 3: Valor do Pedido
+		String idVendedor = campos[4];
 
 		// Buscar informações do cliente
 		try {
 			this.cliente = new Cliente("./src/Arquivos/Cliente.txt", 0, idCliente);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Erro ao buscar cliente com ID: " + idCliente + ". Verifique se os dados do cliente estão corretos.", e);
+		}
+
+		try {
+			this.vendedor = new Vendedor("./src/Arquivos/Vendedor.txt", 0, idVendedor);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Erro ao buscar vendedor com ID: " + idVendedor + ". Verifique se os dados do vendedor estão corretos.", e);
 		}
 
 		// Capturar itens do pedido
@@ -84,7 +95,7 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "Pedido [idPedido=" + idPedido + ", cliente=" + cliente + ", valor=" + valor + ", itens="
-				+ Arrays.toString(itens) + "]";
+				+ Arrays.toString(itens) +", vendedor=" + vendedor +", data="+data+ "]";
 	}
 
 	public Item[] getItens() {
@@ -93,5 +104,14 @@ public class Pedido {
 
 	public Cliente getCliente() {
 		return this.cliente;
+	}
+
+	public Vendedor getVendedor() {
+		return this.vendedor;
+	}
+
+	public String getData() {
+		String formatteddata = this.data.split("-")[2]+"/"+this.data.split("-")[1]+"/"+this.data.split("-")[0];
+		return formatteddata;
 	}
 }

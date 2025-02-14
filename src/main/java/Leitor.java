@@ -1,18 +1,15 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.FileOutputStream;
 
 //import do itextpdf
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfPCell;
 
 public class Leitor {
 	private String caminhoArquivo;
@@ -59,6 +56,7 @@ public class Leitor {
 		String caminhoProdutos = "./src/Arquivos/Produto.txt";
 		String caminhoCategorias = "./src/Arquivos/Categoria.txt";
 		String caminhoClientes = "./src/Arquivos/WDCliente.txt";
+		String caminhoVendedores = "./src/Arquivos/Vendedor.txt";
 
 		// Processamento dos pedidos
 
@@ -82,6 +80,8 @@ public class Leitor {
 			// Obter cliente
 			Cliente cliente = pedido.getCliente();
 
+			Vendedor vendedor = pedido.getVendedor();
+
 			// Obter itens do pedido
 			Item[] itens = pedido.getItens();
 
@@ -91,7 +91,10 @@ public class Leitor {
 
 			document.add(new Paragraph("Pedido ID: " + idPedido, fontConteudo));
 			document.add(new Paragraph("Cliente: " + cliente.getNome() + " (CPF: " + cliente.getCpf() + ")", fontConteudo));
+			document.add(new Paragraph("Vendedor: " + vendedor.getNome(), fontConteudo));
+			document.add(new Paragraph("Data: "+pedido.getData()));
 			document.add(new Paragraph("Itens do Pedido:", fontConteudo));
+
 
 			PdfPTable table = new PdfPTable(5);
 			table.addCell("Produto");
@@ -127,7 +130,7 @@ public class Leitor {
 			// Exibir resumo do pedido
 			document.add(new Paragraph("\nResumo do Pedido:", fontConteudo));
 			document.add(new Paragraph(" - Valor Total: R$ " + String.format("%.2f", valorTotalPedido), fontConteudo));
-			document.add(new Paragraph(" - Comissão Total: R$ " + String.format("%.2f", comissaoTotal), fontConteudo));
+			document.add(new Paragraph(" - Comissão Total do vendedor "+vendedor.getNome()+": R$ " + String.format("%.2f", comissaoTotal), fontConteudo));
 			document.add(new Paragraph("---------------------------------------------------", fontConteudo));
 		}
 		document.close();
